@@ -1,6 +1,6 @@
 #lang racket
 
-(require threading)
+(require threading "util.rkt")
 
 (define (day1-1 expenses)
     (~> expenses
@@ -13,26 +13,24 @@
         multiply-list))
 
 (define (get-triplet expenses)
-    (let([first-expense (first expenses)])
-        (match (get-pair (- 2020 first-expense) (list-tail expenses 1))
+    (match-let ([(cons first-expense trail) (pop-first expenses)])
+        (match (get-pair (- 2020 first-expense) trail)
             [(list a b) (list first-expense a b)]
-            [_ (if (> (length expenses) 2)
-                (get-triplet (list-tail expenses 1))
-                '()
-            )])
-        ))
+            [_ (if (> (length trail) 1)
+                (get-triplet trail)
+                '())])))
 
 (define (get-pair target expenses)
     (if (> (length expenses) 0)
-        (check-to-target target (first expenses) (list-tail expenses 1))
+        (check-to-target target (first expenses) (drop-first expenses))
         '()))
 
 (define (check-to-target target el trailing)
     (match (find-match target el trailing)
         [(list m) (list el m)]
         [_ (if (> (length trailing) 0)
-                (check-to-target target (first trailing) (list-tail trailing 1))
-                '())]))
+            (check-to-target target (first trailing) (drop-first trailing))
+            '())]))
 
 (define (find-match target el trailing)
     (let ([t (- target el)])
