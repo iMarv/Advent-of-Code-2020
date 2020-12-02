@@ -8,7 +8,7 @@
 (define (drop-first l)
     (list-tail l 1))
 
-(define (string-tochar s)
+(define (string->char s)
     (~> s
         string->list
         first))
@@ -16,4 +16,10 @@
 (define (is-between? min max num)
     (and (>= num min) (<= num max)))
 
-(provide pop-first drop-first string-tochar is-between?)
+(define (is-char-at? pos char str)
+    (~> str
+        (substring _ (- pos 1) pos)
+        (string->char _)
+        (char=? _ char)))
+
+(provide pop-first drop-first string->char is-between? is-char-at?)

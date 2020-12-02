@@ -8,4 +8,5 @@
         ["day1-1" (day1-1 day1-input)]
         ["day1-2" (day1-2 day1-input)]
         ["day2-1" (day2-1 day2-input)]
+        ["day2-2" (day2-2 day2-input)]
         [_ (printf "No solution for ~s~n" day-script)]))

@@ -10,6 +10,13 @@
         (test-suite "split-pass"
             (test-equal? "Split password into list"
                 (split-pass "1-3 a: abcde") '("1" "3" "a" "abcde")))
+        (test-suite "Puzzle 2"
+            (test-equal? "find correct amount"
+                (day2-2 '(
+                    "1-3 a: abcde"
+                    "1-3 b: cdefg"
+                    "2-9 c: ccccccccc"
+                    )) 1))
         (test-suite "Puzzle 1"
             (test-equal? "find correct amount"
                 (day2-1 '(
