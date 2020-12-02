@@ -38,7 +38,4 @@
             (lambda (num) (= num t))
             trailing)))
 
-(define multiply-list (compose
-    (curry foldl * 1)))
-
 (provide day1-1 day1-2 find-match get-pair get-triplet)
