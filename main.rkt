@@ -10,4 +10,5 @@
         ["day2-1" (day2-1 day2-input)]
         ["day2-2" (day2-2 day2-input)]
         ["day3-1" (day3-1 day3-input)]
+        ["day3-2" (day3-2 day3-input)]
         [_ (printf "No solution for ~s~n" day-script)]))

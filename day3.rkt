@@ -5,6 +5,15 @@
 (define (day3-1 rows)
     (traverse-forest 0 0 3 1 0 rows))
 
+(define (day3-2 rows)
+    (multiply-list (list
+        (traverse-forest 0 0 1 1 0 rows)
+        (traverse-forest 0 0 3 1 0 rows)
+        (traverse-forest 0 0 5 1 0 rows)
+        (traverse-forest 0 0 7 1 0 rows)
+        (traverse-forest 0 0 1 2 0 rows)
+    )))
+
 (define tree #\#)
 
 (define (traverse-forest posx posy stepx stepy trees rows)
@@ -27,4 +36,4 @@
     (is-char-at-wrap? posx tree
         (list-ref rows posy)))
 
-(provide day3-1)
+(provide day3-1 day3-2)
