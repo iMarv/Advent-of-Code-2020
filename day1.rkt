@@ -21,14 +21,14 @@
                 '())])))
 
 (define (get-pair target expenses)
-    (if (> (length expenses) 0)
+    (if (not (empty? expenses))
         (check-to-target target (first expenses) (drop-first expenses))
         '()))
 
 (define (check-to-target target el trailing)
     (match (find-match target el trailing)
         [(list m) (list el m)]
-        [_ (if (> (length trailing) 0)
+        [_ (if (not (empty? trailing))
             (check-to-target target (first trailing) (drop-first trailing))
             '())]))
 

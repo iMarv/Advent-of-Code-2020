@@ -17,15 +17,16 @@
 (define tree #\#)
 
 (define (traverse-forest posx posy stepx stepy trees rows)
-    (if (< posy (- (length rows) 1))
-        (traverse-forest
-            (+ posx stepx)
-            (+ posy stepy)
-            stepx
-            stepy
-            (if-tree++ posx posy rows trees)
-            rows)
-        (if-tree++ posx posy rows trees)))
+    (let ([curr-tree (if-tree++ posx posy rows trees)])
+        (if (< posy (- (length rows) 1))
+            (traverse-forest
+                (+ posx stepx)
+                (+ posy stepy)
+                stepx
+                stepy
+                curr-tree
+                rows)
+            curr-tree)))
 
 (define (if-tree++ posx posy rows trees)
     (if (is-tree? posx posy rows)

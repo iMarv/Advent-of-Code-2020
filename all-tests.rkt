@@ -10,6 +10,12 @@
         ["day1" (run-tests day1-tests)]
         ["day2" (run-tests day2-tests)]
         ["day3" (run-tests day3-tests)]
+        ["all"
+            (run-tests util-tests)
+            (run-tests day1-tests)
+            (run-tests day2-tests)
+            (run-tests day3-tests)
+        ]
         [_ (printf "No day matching '~s'~n" day)]))
 
 
