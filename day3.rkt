@@ -2,19 +2,10 @@
 
 (require "util.rkt")
 
-(define (day3-1 rows)
-    (traverse-forest 0 0 3 1 0 rows))
-
-(define (day3-2 rows)
-    (multiply-list (list
-        (traverse-forest 0 0 1 1 0 rows)
-        (traverse-forest 0 0 3 1 0 rows)
-        (traverse-forest 0 0 5 1 0 rows)
-        (traverse-forest 0 0 7 1 0 rows)
-        (traverse-forest 0 0 1 2 0 rows)
-    )))
-
 (define tree #\#)
+
+(define (traverse stepx stepy rows)
+    (traverse-forest 0 0 stepx stepy 0 rows))
 
 (define (traverse-forest posx posy stepx stepy trees rows)
     (let ([curr-tree (if-tree++ posx posy rows trees)])
@@ -36,5 +27,18 @@
 (define (is-tree? posx posy rows)
     (is-char-at-wrap? posx tree
         (list-ref rows posy)))
+
+(define day3-1 (curry traverse 3 1))
+
+(define slopes (list
+    '(1 1)
+    '(3 1)
+    '(5 1)
+    '(7 1)
+    '(1 2)))
+
+(define (day3-2 rows)
+    (multiply-list (for/list ([step slopes])
+        (traverse (first step) (second step) rows))))
 
 (provide day3-1 day3-2)
