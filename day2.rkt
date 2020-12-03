@@ -30,8 +30,8 @@
 (define (is-valid-pass2? p)
     (match-let ([(list min max char pass) p])
         (xor
-            (is-char-at? (string->number min) (string->char char) pass)
-            (is-char-at? (string->number max) (string->char char) pass))))
+            (is-char-at? (- (string->number min) 1) (string->char char) pass)
+            (is-char-at? (- (string->number max) 1) (string->char char) pass))))
 
 (define (day2-1 passwords)
     (~> passwords
