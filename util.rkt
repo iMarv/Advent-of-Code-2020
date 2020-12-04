@@ -29,7 +29,17 @@
 (define (is-char-at-wrap? pos char str)
     (is-char-at? (modulo pos (string-length str)) char str))
 
+(define (every? proc lst)
+    (= (length lst) (count proc lst)))
+
+(define (some? proc lst)
+    (> (count proc lst) 0))
+
+(define (substring-from-tail str amount)
+    (substring str (- (string-length str) amount)))
+
 (provide pop-first drop-first
     string->char is-between?
     is-char-at? multiply-list
-    get-strchar-at is-char-at-wrap?)
+    get-strchar-at is-char-at-wrap?
+    every? substring-from-tail some?)

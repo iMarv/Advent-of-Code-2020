@@ -1,6 +1,6 @@
 #lang racket
 
-(require racket/cmdline "inputs.rkt" "day1.rkt" "day2.rkt" "day3.rkt")
+(require racket/cmdline "inputs.rkt" "day1.rkt" "day2.rkt" "day3.rkt" "day4.rkt")
 
 (command-line
     #:args (day-script)
@@ -11,4 +11,6 @@
         ["day2-2" (day2-2 day2-input)]
         ["day3-1" (day3-1 day3-input)]
         ["day3-2" (day3-2 day3-input)]
+        ["day4-1" (day4-1 day4-input)]
+        ["day4-2" (day4-2 day4-input)]
         [_ (printf "No solution for ~s~n" day-script)]))
