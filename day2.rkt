@@ -6,11 +6,11 @@
     (match-let ([(list amount char pass) (string-split p)])
         (append
             (string-split amount "-")
-            (list (substring char 0 1))
+            (list (get-strchar-at 0 char))
             (list pass))))
 
 (define (remove-chars c l)
-    (filter (lambda (char) (char=? c char)) l))
+    (filter (curry char=? c) l))
 
 (define (clean-pass p)
     (match-let ([(list min max char pass) p])
@@ -30,20 +30,22 @@
 (define (is-valid-pass2? p)
     (match-let ([(list min max char pass) p])
         (xor
-            (is-char-at? (- (string->number min) 1) (string->char char) pass)
-            (is-char-at? (- (string->number max) 1) (string->char char) pass))))
+            (is-char-at?
+                (- (string->number min) 1)
+                (string->char char) pass)
+            (is-char-at?
+                (- (string->number max) 1)
+                (string->char char) pass))))
 
 (define (day2-1 passwords)
     (~> passwords
         (map split-pass _)
         (map clean-pass _)
-        (filter is-valid-pass1? _)
-        (length _)))
+        (count is-valid-pass1? _)))
 
 (define (day2-2 passwords)
     (~> passwords
         (map split-pass _)
-        (filter is-valid-pass2? _)
-        (length _)))
+        (count is-valid-pass2? _)))
 
 (provide day2-1 day2-2 split-pass clean-pass)

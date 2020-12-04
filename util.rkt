@@ -24,14 +24,16 @@
     (~> str
         (get-strchar-at pos _)
         (string->char _)
-        (char=? _ char)))
+        (char=? char _)))
 
 (define (is-char-at-wrap? pos char str)
     (is-char-at? (modulo pos (string-length str)) char str))
 
+; Could be more efficient by stopping as soon as it hits false
 (define (every? proc lst)
     (= (length lst) (count proc lst)))
 
+; Could be more efficient by stopping as soo nas it hits true
 (define (some? proc lst)
     (> (count proc lst) 0))
 

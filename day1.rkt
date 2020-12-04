@@ -2,16 +2,6 @@
 
 (require threading "util.rkt")
 
-(define (day1-1 expenses)
-    (~> expenses
-        (get-pair 2020 _)
-        multiply-list))
-
-(define (day1-2 expenses)
-    (~>> expenses
-        get-triplet
-        multiply-list))
-
 (define (get-triplet expenses)
     (match-let ([(cons first-expense trail) (pop-first expenses)])
         (match (get-pair (- 2020 first-expense) trail)
@@ -37,5 +27,15 @@
         (filter
             (lambda (num) (= num t))
             trailing)))
+
+(define (day1-1 expenses)
+    (~> expenses
+        (get-pair 2020 _)
+        multiply-list))
+
+(define (day1-2 expenses)
+    (~>> expenses
+        get-triplet
+        multiply-list))
 
 (provide day1-1 day1-2 find-match get-pair get-triplet)
