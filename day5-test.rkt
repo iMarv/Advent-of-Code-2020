@@ -4,11 +4,6 @@
 
 (define day5-tests
     (test-suite "Day5"
-        (test-suite "find-middle"
-            (test-equal? "RLR"
-                (find-middle 8 "RLR") 5)
-            (test-equal? "FBFBBFF"
-                (find-middle 128 "FBFBBFF") 44))
         (test-suite "get-seat-id"
             (test-equal? "BBFFBBFRLL"
                 (get-seat-id "BBFFBBFRLL") 820)

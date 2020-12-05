@@ -2,24 +2,18 @@
 
 (require threading "util.rkt")
 
-
-(define (split-recur lst code)
-    (if (= (length lst) 1)
-        (first lst)
-        (split-recur
-            (match (get-strchar-at 0 code)
-                [(or "F" "L") (pop-left lst)]
-                [(or "B" "R") (pop-right lst)])
-            (string-drop-first code))))
-
-(define (find-middle max code)
-    (split-recur (sequence->list (in-range max)) code))
+(define (to-bin code)
+    (~> code
+        string->list
+        (map (lambda (c) (match c
+            [(or #\F #\L) #\0]
+            [(or #\B #\R) #\1])) _)
+        list->string
+        (string->number _ 2)))
 
 (define (get-seat-id pass)
-    (let (
-        [row (find-middle 128 (substring pass 0 7))]
-        [col (find-middle 8 (substring-from-tail pass 3))])
-            (+ col (* row 8))))
+    (+ (* 8 (to-bin (substring pass 0 7)))
+       (to-bin (substring-from-tail pass 3))))
 
 (define (find-gap lst)
     (if (> (- (second lst) (first lst)) 1)
@@ -37,4 +31,4 @@
         (sort _ <)
         (find-gap _)))
 
-(provide day5-1 day5-2 get-seat-id find-middle)
+(provide day5-1 day5-2 get-seat-id)
