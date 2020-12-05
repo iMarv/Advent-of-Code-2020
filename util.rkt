@@ -2,11 +2,20 @@
 
 (require threading)
 
-(define (pop-first l)
-    (cons (first l) (drop-first l)))
+(define (pop-first lst)
+    (cons (first lst) (drop-first lst)))
+
+(define (pop-left lst)
+    (drop-right lst (/ (length lst) 2)))
+
+(define (pop-right lst)
+    (take-right lst (/ (length lst) 2)))
 
 (define drop-first (compose
     (curryr list-tail 1)))
+
+(define (string-drop-first str)
+    (substring str 1))
 
 (define string->char
     (compose first string->list))
@@ -44,4 +53,5 @@
     string->char is-between?
     is-char-at? multiply-list
     get-strchar-at is-char-at-wrap?
-    every? substring-from-tail some?)
+    every? substring-from-tail some?
+    string-drop-first pop-left pop-right)

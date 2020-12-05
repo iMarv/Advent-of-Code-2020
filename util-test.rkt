@@ -4,6 +4,9 @@
 
 (define util-tests
     (test-suite "util"
+        (test-suite "string-drop-first"
+            (test-equal? "returns string without first char"
+                (string-drop-first "hallo") "allo"))
         (test-suite "some?"
             (test-equal? "false if no matches"
                 (some? (curry = 1) '(3 2 3)) #f)
