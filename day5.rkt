@@ -4,16 +4,15 @@
 
 (define (to-bin code)
     (~> code
-        string->list
-        (map (lambda (c) (match c
+        (map-chars (lambda (c) (match c
             [(or #\F #\L) #\0]
             [(or #\B #\R) #\1])) _)
-        list->string
         (string->number _ 2)))
 
 (define (get-seat-id pass)
-    (+ (* 8 (to-bin (substring pass 0 7)))
-       (to-bin (substring-from-tail pass 3))))
+    (match-let ([(cons row col) (string-split-at pass 7)])
+        (+  (* 8 (to-bin row))
+            (to-bin col))))
 
 (define (find-gap lst)
     (if (> (- (second lst) (first lst)) 1)

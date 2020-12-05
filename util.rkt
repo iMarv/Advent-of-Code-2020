@@ -17,6 +17,9 @@
 (define (string-drop-first str)
     (substring str 1))
 
+(define (string-split-at str pos)
+    (cons (substring str 0 pos) (substring str pos)))
+
 (define string->char
     (compose first string->list))
 
@@ -49,9 +52,16 @@
 (define (substring-from-tail str amount)
     (substring str (- (string-length str) amount)))
 
+(define (map-chars proc str)
+    (~> str
+        string->list
+        (map proc _)
+        list->string))
+
 (provide pop-first drop-first
     string->char is-between?
     is-char-at? multiply-list
     get-strchar-at is-char-at-wrap?
     every? substring-from-tail some?
-    string-drop-first pop-left pop-right)
+    string-drop-first pop-left pop-right
+    map-chars string-split-at)
