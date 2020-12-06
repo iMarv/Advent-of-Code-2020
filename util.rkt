@@ -58,10 +58,23 @@
         (map proc _)
         list->string))
 
+(define (join-groups rem-lines curr-pass joined-pass)
+    (if (not (empty? rem-lines))
+        (match-let ([(cons next rem) (pop-first rem-lines)])
+            (if (non-empty-string? next)
+                (join-groups rem
+                    (string-trim (string-join (list curr-pass next)))
+                    joined-pass)
+                (join-groups rem
+                    next
+                    (append joined-pass (list curr-pass)))))
+        (append joined-pass (list curr-pass))))
+
+
 (provide pop-first drop-first
     string->char is-between?
     is-char-at? multiply-list
     get-strchar-at is-char-at-wrap?
     every? substring-from-tail some?
     string-drop-first pop-left pop-right
-    map-chars string-split-at)
+    map-chars string-split-at join-groups)

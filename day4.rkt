@@ -2,18 +2,6 @@
 
 (require threading "util.rkt")
 
-(define (join-passports rem-lines curr-pass joined-pass)
-    (if (not (empty? rem-lines))
-        (match-let ([(cons next rem) (pop-first rem-lines)])
-            (if (non-empty-string? next)
-                (join-passports rem
-                    (string-trim (string-join (list curr-pass next)))
-                    joined-pass)
-                (join-passports rem
-                    next
-                    (append joined-pass (list curr-pass)))))
-        (append joined-pass (list curr-pass))))
-
 (define req-entries (list
     "byr"
     "iyr"
@@ -91,16 +79,16 @@
 
 (define (day4-1 passports)
     (~> passports
-        (join-passports _ "" '())
+        (join-groups _ "" '())
         count-valid))
 
 (define (day4-2 passports)
     (~> passports
-        (join-passports _ "" '())
+        (join-groups _ "" '())
         filter-valid
         (map passport-to-list _)
         (map passport-list-to-pair-list _)
         (count validate-entries _)))
 
-(provide day4-1 day4-2 join-passports string-contains-all? validate-hgt
+(provide day4-1 day4-2 string-contains-all? validate-hgt
     validate-between entry-to-pair validate-entries validate-entry)

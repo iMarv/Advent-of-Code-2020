@@ -88,10 +88,6 @@
                 (string-contains-all? "abc" '("a" "b" "c" "d")) #f)
             (test-equal? "true if all partials are in string"
                 (string-contains-all? "abc" '("a" "b" "c")) #t))
-
-        (test-suite "join-passports"
-            (test-equal? "correctly join passports"
-                    (join-passports '("a b" "c" "" "d" "e f") "" (list)) '("a b c" "d e f")))
         (test-suite "Puzzle2"
             (test-equal? "find correct number"
                 (day4-2 day4-2-test-input) 4))

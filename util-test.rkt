@@ -4,6 +4,9 @@
 
 (define util-tests
     (test-suite "util"
+        (test-suite "join-groups"
+            (test-equal? "correctly join groups"
+                (join-groups '("a b" "c" "" "d" "e f") "" (list)) '("a b c" "d e f")))
         (test-suite "string-drop-first"
             (test-equal? "returns string without first char"
                 (string-drop-first "hallo") "allo"))
